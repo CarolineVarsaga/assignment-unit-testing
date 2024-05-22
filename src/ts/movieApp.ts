@@ -6,4 +6,4 @@ export const init = () => {
     e.preventDefault();
     handleSubmit();
   });
-};
+}; 

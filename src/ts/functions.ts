@@ -38,6 +38,6 @@ export async function handleSubmit() {
       displayNoResult(container);
     }
   } catch {
-    displayNoResult(container);
+      displayNoResult(container);
   }
 }
