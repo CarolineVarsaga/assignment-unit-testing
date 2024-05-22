@@ -7,6 +7,27 @@ export const movies: IMovie[] = [
         Type: "movie", 
         Poster: "N/A", 
         Year: "2012" 
+    }, 
+    { 
+        Title: "Avengers", 
+        imdbID: "2", 
+        Type: "movie", 
+        Poster: "N/A", 
+        Year: "2018" 
+    }, 
+    { 
+        Title: "Star Wars", 
+        imdbID: "3", 
+        Type: "movie", 
+        Poster: "N/A", 
+        Year: "1977" 
+    }, 
+    { 
+        Title: "E.T. the Extra-Terrestrial", 
+        imdbID: "4", 
+        Type: "movie", 
+        Poster: "N/A", 
+        Year: "1982" 
     }
 ]
 
