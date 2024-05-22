@@ -20,12 +20,23 @@ describe("functions tests", () => {
 
         mockedGetData = jest.spyOn(functions, "getData");
         mockedCreateHtml = jest.spyOn(htmlFunctions, "createHtml");
-        mockedDisplayNoResult = jest.spyOn(htmlFunctions, "displayNoResult");
+        mockedDisplayNoResult = jest.spyOn(htmlFunctions, "displayNoResult");    
     })
 
     afterEach(() => {
         jest.restoreAllMocks();
     });
+
+    test("it should sort movies in ascending order", () => {
+        const sortedMovies = movieSort(movies, false);
+
+        expect(sortedMovies).toEqual([
+            { Title: "Star Wars", imdbID: "3", Type: "movie", Poster: "N/A", Year: "1977" },
+            { Title: "E.T. the Extra-Terrestrial", imdbID: "4", Type: "movie", Poster: "N/A", Year: "1982" },
+            { Title: "Avengers", imdbID: "1", Type: "movie", Poster: "N/A", Year: "2012" },
+            { Title: "Avengers", imdbID: "2", Type: "movie", Poster: "N/A", Year: "2018" }             
+        ]) 
+    })
 
     test("it should sort movies in descending order", () => {      
         const sortedMovies = movieSort(movies, true);
@@ -36,18 +47,7 @@ describe("functions tests", () => {
             { Title: "E.T. the Extra-Terrestrial", imdbID: "4", Type: "movie", Poster: "N/A", Year: "1982" },
             { Title: "Star Wars", imdbID: "3", Type: "movie", Poster: "N/A", Year: "1977" }      
         ])
-    })
-
-    test("it should sort movies in ascending order", () => {
-        const sortedMovies = movieSort(movies, false);
-
-        expect(sortedMovies).toEqual([
-            { Title: "Star Wars", imdbID: "3", Type: "movie", Poster: "N/A", Year: "1977" },
-            { Title: "E.T. the Extra-Terrestrial", imdbID: "4", Type: "movie", Poster: "N/A", Year: "1982" },
-            { Title: "Avengers", imdbID: "1", Type: "movie", Poster: "N/A", Year: "2012" },
-            { Title: "Avengers", imdbID: "2", Type: "movie", Poster: "N/A", Year: "2018" }             
-        ])
-    })
+    })    
 
     test("it should return 0 when titles are in equal order", () => {
        const sortedMovies = movieSort(movies);
