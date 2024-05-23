@@ -20,7 +20,7 @@ describe("functions tests", () => {
 
         mockedGetData = jest.spyOn(functions, "getData");
         mockedCreateHtml = jest.spyOn(htmlFunctions, "createHtml");
-        mockedDisplayNoResult = jest.spyOn(htmlFunctions, "displayNoResult");    
+        mockedDisplayNoResult = jest.spyOn(htmlFunctions, "displayNoResult");   
     })
 
     afterEach(() => {
@@ -60,33 +60,36 @@ describe("functions tests", () => {
         ]) 
     })
 
-    test("it should call createHtml with movies when getData resolves", async () => {
-        mockedGetData.mockResolvedValueOnce(movies); 
+    test("it should call createHtml with movies when getData resolves", async () => {   
+        const container = document.getElementById("movie-container") as HTMLDivElement;      
+        mockedGetData.mockResolvedValueOnce(movies);         
 
         await handleSubmit(); 
 
         expect(mockedGetData).toHaveBeenCalled();
-        expect(mockedCreateHtml).toHaveBeenCalledWith(movies, expect.any(HTMLDivElement));
+        expect(mockedCreateHtml).toHaveBeenCalledWith(movies, container);
         expect(mockedDisplayNoResult).not.toHaveBeenCalled(); 
       }); 
 
     test("it should call displayNoResult when getData returns an empty array", async () => {
+        const container = document.getElementById("movie-container") as HTMLDivElement; 
         mockedGetData.mockResolvedValueOnce([]);
 
         await handleSubmit();
 
         expect(mockedGetData).toHaveBeenCalled();
         expect(mockedCreateHtml).not.toHaveBeenCalled();
-        expect(mockedDisplayNoResult).toHaveBeenCalledWith(expect.any(HTMLDivElement));
+        expect(mockedDisplayNoResult).toHaveBeenCalledWith(container);
     });
     
     test("it should call displayNoResult when getData rejects", async () => {
+        const container = document.getElementById("movie-container") as HTMLDivElement; 
         mockedGetData.mockRejectedValueOnce(new Error("error")); 
 
         await handleSubmit(); 
 
         expect(mockedGetData).toHaveBeenCalled();
         expect(mockedCreateHtml).not.toHaveBeenCalled();
-        expect(mockedDisplayNoResult).toHaveBeenCalledWith(expect.any(HTMLDivElement)); 
+        expect(mockedDisplayNoResult).toHaveBeenCalledWith(container); 
     })
 })
