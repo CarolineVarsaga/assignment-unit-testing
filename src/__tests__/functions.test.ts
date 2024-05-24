@@ -41,6 +41,7 @@ describe("functions tests", () => {
         const sortedTitles = sortedMovies.map(movie => movie.Title);
         expect(sortedTitles).toEqual(expectedTitles);
         expect(sortedMovies[0].Title).toBe(mockedMovies[0].Title);
+        expect(sortedMovies).toHaveLength(mockedMovies.length); 
     })
 
     test("it should sort movies in descending order", () => {      
@@ -54,6 +55,7 @@ describe("functions tests", () => {
         const sortedTitles = sortedMovies.map(movie => movie.Title);
         expect(sortedTitles).toEqual(expectedTitles);
         expect(sortedMovies[0].Title).toBe(mockedMovies[0].Title);
+        expect(sortedMovies).toHaveLength(mockedMovies.length); 
     })    
 
     test("it should return 0 when titles are in equal order", () => {
@@ -67,6 +69,7 @@ describe("functions tests", () => {
         const sortedTitles = sortedMovies.map(movie => movie.Title);
         expect(sortedTitles).toEqual(expectedTitles);
         expect(sortedMovies[0].Title).toBe(mockedMovies[0].Title);
+        expect(sortedMovies).toHaveLength(mockedMovies.length); 
     })
 
     test("it should call createHtml with movies when getData resolves", async () => {   
