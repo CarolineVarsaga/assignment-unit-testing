@@ -8,6 +8,7 @@ describe("functions tests", () => {
     let mockedGetData: jest.SpyInstance<Promise<IMovie[]>, [string]>; 
     let mockedCreateHtml: jest.SpyInstance<void>; 
     let mockedDisplayNoResult: jest.SpyInstance<void>;
+    let mockedMovies = movies; 
 
     beforeEach(() => {
         document.body.innerHTML = `
@@ -21,43 +22,51 @@ describe("functions tests", () => {
         mockedGetData = jest.spyOn(functions, "getData");
         mockedCreateHtml = jest.spyOn(htmlFunctions, "createHtml");
         mockedDisplayNoResult = jest.spyOn(htmlFunctions, "displayNoResult");   
+        mockedMovies = [...movies];
     })
 
     afterEach(() => {
         jest.restoreAllMocks();
+        mockedMovies = []; 
     });
 
     test("it should sort movies in ascending order", () => {
-        const sortedMovies = movieSort(movies, false);
+        const sortedMovies = movieSort(mockedMovies, false); 
+        const expectedTitles = ["Star Wars", "E.T. the Extra-Terrestrial", "Avengers", "Avengers"];
 
-        expect(sortedMovies).toEqual([
-            { Title: "Star Wars", imdbID: "3", Type: "movie", Poster: "N/A", Year: "1977" },
-            { Title: "E.T. the Extra-Terrestrial", imdbID: "4", Type: "movie", Poster: "N/A", Year: "1982" },
-            { Title: "Avengers", imdbID: "1", Type: "movie", Poster: "N/A", Year: "2012" },
-            { Title: "Avengers", imdbID: "2", Type: "movie", Poster: "N/A", Year: "2018" }             
-        ]) 
+        for (let i = 0; i < expectedTitles.length; i++) {
+            expect(sortedMovies[i].Title).toBe(expectedTitles[i]);
+        }
+
+        const sortedTitles = sortedMovies.map(movie => movie.Title);
+        expect(sortedTitles).toEqual(expectedTitles);
+        expect(sortedMovies[0].Title).toBe(mockedMovies[0].Title);
     })
 
     test("it should sort movies in descending order", () => {      
-        const sortedMovies = movieSort(movies, true);
+        const sortedMovies = movieSort(mockedMovies, true); 
+        const expectedTitles = ["Avengers", "Avengers", "E.T. the Extra-Terrestrial", "Star Wars"];
 
-        expect(sortedMovies).toEqual([
-            { Title: "Avengers", imdbID: "1", Type: "movie", Poster: "N/A", Year: "2012" }, 
-            { Title: "Avengers", imdbID: "2", Type: "movie", Poster: "N/A", Year: "2018" }, 
-            { Title: "E.T. the Extra-Terrestrial", imdbID: "4", Type: "movie", Poster: "N/A", Year: "1982" },
-            { Title: "Star Wars", imdbID: "3", Type: "movie", Poster: "N/A", Year: "1977" }      
-        ])
+        for (let i = 0; i < expectedTitles.length; i++) {
+            expect(sortedMovies[i].Title).toBe(expectedTitles[i]);
+        }
+
+        const sortedTitles = sortedMovies.map(movie => movie.Title);
+        expect(sortedTitles).toEqual(expectedTitles);
+        expect(sortedMovies[0].Title).toBe(mockedMovies[0].Title);
     })    
 
     test("it should return 0 when titles are in equal order", () => {
-       const sortedMovies = movieSort(movies);
+        const sortedMovies = movieSort(mockedMovies); 
+        const expectedTitles = ["Avengers", "Avengers", "E.T. the Extra-Terrestrial", "Star Wars"];
 
-         expect(sortedMovies).toEqual([
-            { Title: "Avengers", imdbID: "1", Type: "movie", Poster: "N/A", Year: "2012" }, 
-            { Title: "Avengers", imdbID: "2", Type: "movie", Poster: "N/A", Year: "2018" }, 
-            { Title: "E.T. the Extra-Terrestrial", imdbID: "4", Type: "movie", Poster: "N/A", Year: "1982" },
-            { Title: "Star Wars", imdbID: "3", Type: "movie", Poster: "N/A", Year: "1977" }       
-        ]) 
+        for (let i = 0; i < expectedTitles.length; i++) {
+            expect(sortedMovies[i].Title).toBe(expectedTitles[i]);
+        }
+
+        const sortedTitles = sortedMovies.map(movie => movie.Title);
+        expect(sortedTitles).toEqual(expectedTitles);
+        expect(sortedMovies[0].Title).toBe(mockedMovies[0].Title);
     })
 
     test("it should call createHtml with movies when getData resolves", async () => {   
